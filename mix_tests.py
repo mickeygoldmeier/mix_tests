@@ -32,27 +32,42 @@ def get_test():
 
 
 def print_test(test):
-    num = int(input("amount of tests: "))
-    test1 = test.mix_test()
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_xy(90, 8)
-    pdf.set_font("arial", "B", 12.0)
-    pdf.cell(ln=1, h=5.0, align="L", w=0, txt="test number %s" % num, border=0)
-    for j, question in enumerate(test1.question_list):
-        pdf.set_font("arial", "B", 11.0)
-        pdf.cell(
-            ln=1, h=5.0, align="L", w=0, txt="%s. " % (j + 1) + question.text, border=0
-        )
-        for i, ansewr in enumerate(question.ansewrs):
-            pdf.cell(
-                ln=1, h=5.0, align="L", w=0, txt="    %s. " % (i + 1) + ansewr, border=0
-            )
+    # make dir
     dir_path = os.path.dirname(os.path.realpath(__file__))
     if os.path.exists(dir_path + "\\tests"):
         shutil.rmtree(dir_path + "\\tests")
     os.mkdir(dir_path + "\\tests")
-    pdf.output(dir_path + "\\tests\\test%s.pdf" % str(num), "F")
+
+    # print tests
+    num = int(input("amount of tests: "))
+    for num_test in range(1, num + 1):
+        test1 = test.mix_test()
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_xy(90, 8)
+        pdf.set_font("arial", "B", 12.0)
+        pdf.cell(ln=1, h=5.0, align="L", w=0, txt="test number %s" % num, border=0)
+        for j, question in enumerate(test1.question_list):
+            pdf.set_font("arial", "B", 11.0)
+            pdf.cell(
+                ln=1,
+                h=5.0,
+                align="L",
+                w=0,
+                txt="%s. " % (j + 1) + question.text,
+                border=0,
+            )
+            for i, ansewr in enumerate(question.ansewrs):
+                pdf.cell(
+                    ln=1,
+                    h=5.0,
+                    align="L",
+                    w=0,
+                    txt="    %s. " % (i + 1) + ansewr,
+                    border=0,
+                )
+
+        pdf.output(dir_path + "\\tests\\test%s.pdf" % str(num_test), "F")
 
 
 def write_test(entry_list):
@@ -134,14 +149,6 @@ def main():
 
     # start_test.bind("<Button-1>", write_test)
 
-    # a = get_q()
-    # stud = int(input("amount of students "))
-    # for i in range(1, stud + 1):
-    #     test = mix(a)
-    #     for j in range(0, len(test) - 1):
-    #         test[j][1] = mix(test[j][1])
-    #     print_test(i, test)
-
 
 if __name__ == "__main__":
     win = tk.Tk()
@@ -150,4 +157,6 @@ if __name__ == "__main__":
     win.wm_iconbitmap("win_icon.ico")
     main()
     win.mainloop()
+    # a = get_test()
+    # print_test(a)
 
