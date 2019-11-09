@@ -12,6 +12,9 @@ from random import randint
 from fpdf import FPDF
 from q_class import Question, Test
 import tkinter as tk
+import os
+import sys
+import shutil
 
 
 def get_test():
@@ -45,11 +48,11 @@ def print_test(test):
             pdf.cell(
                 ln=1, h=5.0, align="L", w=0, txt="    %s. " % (i + 1) + ansewr, border=0
             )
-    pdf.output(
-        "C:\\Users\\Mickey\\Documents\\python\\fun\\mix_tests\\tests\\test%s.pdf"
-        % str(num),
-        "F",
-    )
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    if os.path.exists(dir_path + "\\tests"):
+        shutil.rmtree(dir_path + "\\tests")
+    os.mkdir(dir_path + "\\tests")
+    pdf.output(dir_path + "\\tests\\test%s.pdf" % str(num), "F")
 
 
 def write_test(entry_list):
