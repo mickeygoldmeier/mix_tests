@@ -46,7 +46,7 @@ def print_test(test):
         pdf.add_page()
         pdf.set_xy(90, 8)
         pdf.set_font("arial", "B", 12.0)
-        pdf.cell(ln=1, h=5.0, align="L", w=0, txt="test number %s" % num, border=0)
+        pdf.cell(ln=1, h=5.0, align="L", w=0, txt="test number %s" % num_test, border=0)
         for j, question in enumerate(test1.question_list):
             pdf.set_font("arial", "B", 11.0)
             pdf.cell(
@@ -67,7 +67,7 @@ def print_test(test):
                     border=0,
                 )
 
-        pdf.output(dir_path + "\\tests\\test%s.pdf" % str(num_test), "F")
+        pdf.output(dir_path + "\\tests\\test %s.pdf" % str(num_test), "F")
 
 
 def write_test(entry_list):
@@ -151,12 +151,12 @@ def main():
 
 
 if __name__ == "__main__":
-    win = tk.Tk()
-    win.title("scram")
-    win.geometry("500x500")
-    win.wm_iconbitmap("win_icon.ico")
-    main()
-    win.mainloop()
-    # a = get_test()
-    # print_test(a)
+    # win = tk.Tk()
+    # win.title("scram")
+    # win.geometry("500x500")
+    # win.wm_iconbitmap("win_icon.ico")
+    # main()
+    # win.mainloop()
+    a = get_test()
+    print_test(a)
 
